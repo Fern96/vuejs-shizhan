@@ -1,0 +1,4 @@
+1.初识vue.js
+简单小巧的核心，渐进式技术栈
+MVVM模式（model-view-view model)
+view 和view model之间通过双向绑定建立联系

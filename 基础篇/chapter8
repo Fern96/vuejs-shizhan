@@ -1,0 +1,14 @@
+8.自定义指令
+全局注册：Vue.directive()
+局部注册：directives:
+自定义指令的选项有几个钩子函数组成，每个都是可选的
+bind:只调用一次，指令第一次绑定到元素时调用
+inserted:被绑定元素插入到父节点时调用
+update:被绑定元素所在模板更新时调用
+componentUpdated:被绑定元素所在模板完成一次更新周期时调用
+unbind:只调用一次，指令与元素解绑时调用
+每个钩子函数可用的参数：
+el:指令所绑定的元素，可以用来直接操作DOM
+binding;一个对象，包含以下属性：name,value,oldValue,expression,arg,modifiers
+vnode:Vue编译生成的虚拟节点
+oldVnode：上一个虚拟节点，仅在update和componentUpdated钩子中可用

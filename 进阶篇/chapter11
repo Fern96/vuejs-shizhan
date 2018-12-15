@@ -1,0 +1,41 @@
+11.插件
+11.1前端路由
+前后端分离的开发模式：后端只提供API来返回数据，前端通过AJAX获取数据后，再用一定的方式渲染到页面里，
+                      优点：后端专注在数据上，前端专注在交互和可视化上
+                      缺点：首屏渲染需要时间来加载css和js
+前端路由：由前端来维护一个路由规则。有以下两种实现：
+          （1）利用url的hash，也就是常说的锚点(#)。js通过hashChange事件来监听url的改变，IE7以下需要用轮询
+          （2）H5的History模式，使url看起来像普通网站那样，以/分割，但页面并没有跳转，需要服务器端支持。
+          优点：页面持久性；前后端彻底分离
+11.1.2  vue-router
+ 基本用法：在main.js里使用Vue.use()加载插件
+ 懒加载（按需加载）：component:(resolve)=>require(['./index,vue'],resolve)
+                    这种写法，webpack会把每一个路由打包为一个js文件，在请求到该页面时，才去加载这个页面的js
+                    这样做的好处就是不需要在打开首页的时候就把所有的页面内容加载进来
+ 一次性加载：component:require('./index.vue')
+ 11.1.3跳转
+ vue-router有两种跳转路由的方法
+         （1）使用内置的<router-link>组件，它会被渲染为一个<a>标签
+         （2）使用router实例的方法，通过点击事件跳转
+ 11.1.4 高级用法
+ vue-router提供了导航钩子：beforeEach和afterEach.
+           它们会在路由即将改变前和改变后触发
+
+ 11.2状态管理与vuex
+ const store=new Vuex.Store({
+     //vuex的配置
+     state：{}，
+     mutations:{},
+ }
+ )
+ 仓库store包含了应用的数据（状态）和操作过程。vuex里的数据都是响应式的
+ 数据保存着vuex选项的state字段内
+改变store中数据的唯一途径就是显式地提交mutations。mutations用于直接修改state里的数据。
+在组件内，通过this.$store.commit方法来提交mutations
+注意：mutations里尽量不要异步提交数据，
+     如果提交异步数据了，组件在commit后，数据不能立即改变，而且不知道什么时候会改变。
+vuex的其他三个选项：getters,actions,modules
+     getters:将computed里的方法提取出来
+     actions:与mutations很像，但在action里提交的是mutation，并且可以异步操作业务逻辑
+ 涉及改变数据的，就用mutations;存在业务逻辑的，就用actions
+     modules:用来将store分割到不同模块

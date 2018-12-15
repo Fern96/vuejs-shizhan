@@ -1,0 +1,16 @@
+v-bind及class与style绑定
+4.2.1对象语法
+给v-bind:class(:class)设置一个对象，可以动态地切换class
+对象中可以传入多个属性:class="{'active':isActive,'error':isError}"，每一项为真时，加载相应的类名
+当:class的表达式过长或逻辑复杂时，绑定计算属性。可以使用data或computed或methods
+4.2.1数组语法
+需要应用多个class时，可以给:class绑定一个数组
+<div :class="[activeCls,errorCls]"></div>
+可以使用三元表达式来根据条件切换class
+4.2.3在组件上使用
+直接在自定义组件上使用class或:class，样式规则会直接应用到这个组件的根元素上。
+当不满足自定义组件的最外层是一个根元素或要给具体的子元素设置类名是，应当使用组件的props传递
+
+4.3绑定内联样式
+v-bind:style
+使用:style时，vue.js会自动给特殊的css属性名称增加前缀，如transform

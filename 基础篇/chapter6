@@ -1,0 +1,18 @@
+6.表单与v-model
+6.1基本用法
+v-model:用于在表单类元素上双向绑定数据
+使用v-model后，表单控件显示的值只依赖所绑定的数据，不再关心初始化时的value
+如果希望实时更新，用@input来替代value
+单选按钮：（1）单独使用时，直接用v-bind一个布尔类型的值即可
+          （2）组合使用实现互斥选择时，用v-model来配合value使用
+复选框：（1）单独使用：v-model
+         (2)组合使用：v-model配合value
+下拉列表：v-model会优先匹配value的值。给select添加属性multiple就可以实现多选
+6.2绑定值
+v-model绑定的值是一个静态字符串或布尔值
+可以用v-bind来实现绑定一个动态的数据
+6.3修饰符
+v-model的修饰符：用于控制数据同步的时机
+.lazy:默认在input事件中同步输入框的数据  转变为  在change事件中同步
+.number:将输入转换为Number类型
+.trim:自动过滤输入的首尾空格

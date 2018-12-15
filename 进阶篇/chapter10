@@ -1,0 +1,33 @@
+10.使用webpack
+10.1前端工程化与webpack
+通常，前端自动化（半自动化）工程主要解决以下问题：
+      javascript,css代码的合并与压缩
+      css预处理：less,sass,stylus的编译
+      生成雪碧图（css sprite)
+      es6转es5
+      模块化
+webpack的主要适用场景是SPA(单页面富应用)，SPA由一个html文件和一堆按需加载的js组成。
+我们在业务中写的各种格式的文件，比如typescript，less,jpg,vue等格式的文件，通过特定的加载器（loader）编译后，
+最终统一生成为js,css,png等静态资源文件。在webpack的世界里，一张图片甚至一个字体都称为模块（Module),
+彼此存在依赖关系，webpack就是来处理模块间的依赖关系的，并把他们打包。
+10.2 webpack基础配置
+10.2.1 安装webpack与webpack-dev-server(提供启动一个服务器，热更新，接口代理等服务)
+10.2.2 webpack实质上就是一个.js配置文件（webpack.config.js）
+        最重要也是必选的两项是入口（Entry）和出口（Output）
+        入口：告诉webpack从哪里开始寻找依赖，并且编译
+        出口：配置编译后的文件存储位置和文件名
+webpack-dev-server的热更新功能：通过建立一个websocket连接来实时响应代码的修改
+10.2.3逐步完善配置文件
+style-loader,css-loader增加对css文件的处理（通过js动态创建<style>标签来写入的，即样式代码都已经编译在main.js中）
+使用一个extract-text-webpack-plugin插件把散落在各个地方的css提取出来，并生成一个main.css文件，通过<link>加载
+
+10.3单文件组件与vue-loader
+使用.vue文件需要先安装vue-loader,vue-style-loader
+                      babel,babel-loader(因为要使用es6语法)
+
+10.4用于生产环境
+安装url-loader和file-loader来支持图片，字体等文件
+当遇到.gif,.png,.ttf等格式文件时，url-loader会把它们一起编译到dist目录下，如果小于指定的limit,
+就以base64的形式加载，不会生成一个文件
+安装webpack-merge模块用于合并两个webpack的配置文件
+tip:ejs是一个js模板库，用来从JSON数据中生成HTML字符串，常用与Node.js

@@ -1,0 +1,34 @@
+9.Render函数
+Vue.js 2.x与Vue.js 1.x最大的区别就在于2.x使用了Virtual Dom（虚拟DOM）来更新DOM节点，提升渲染性能
+9.1 Virtual Dom
+React和Vue 2都使用了Virtual Dom技术。
+Virtual Dom并不是真正意义上的DOM，而是一个轻量级的JavaScript对象，在状态发生变化时，Virtual Dom会进行Diff运算，
+来更新只需要被替换的DOM，而不是全部重绘。
+与DOM操作相比，Virtual Dom是基于JavaScript计算的，所以开销会小很多。
+Vue.js2中，Virtual Dom是通过一种VNode类来表达的，每个DOM元素或组件都对应一个VNode对象
+VNode可分为如下几类：
+     TextVNode:文本节点
+     ElementVNode:普通元素节点
+     ComponentVNode:组件节点
+     EmptyVNode:没有内容的注释节点
+     CloneVNode:克隆节点，可以是任意类型的节点
+Render函数通过createElement参数来创建Virtual DOM，结构精简
+9.3 createElement用法
+createElement构成了Vue Virtual Dom的模板，它有3个参数
+     （1）必选参数：可以是一个HTML标签，也可以是一个组件或函数
+     （2）可选参数：数据对象，在template中使用
+     （3）可选参数：子节点
+9.3.2约束
+所有的组件树中，如果VNode是组件或含有组件的slot，那么VNode必须唯一
+9.3.3使用js来代替模板功能
+在Render函数中，不再需要Vue内置的指令（也不能使用），可以用原始JS实现
+v-model就是prop:value和event:input组合使用的一个语法糖
+
+9.4函数化组件
+Vue.js提供一个functional的布尔值选项，设置为true可以使组件无状态和无实例（也就是没有data和this上下文）
+这样用render函数返回虚拟节点可以更容易渲染，因为函数化组件只是一个函数，渲染开销要小很多
+使用函数化组件时，render函数提供了第二个参数context来提供临时上下文；
+
+9.5JSX
+Vue.js提供了插件babel-plugin-transform-vue-jsx来支持jsx语法
+JSX是一种看起来像HTML,但实际上是Javascript的语法扩展，它用更接近于DOM结构的形式来描述一个组件的UI和状态信息
